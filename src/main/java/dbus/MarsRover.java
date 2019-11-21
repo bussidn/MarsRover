@@ -1,0 +1,4 @@
+package dbus;
+
+class MarsRover {
+}

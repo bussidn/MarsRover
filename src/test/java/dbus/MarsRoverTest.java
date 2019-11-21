@@ -19,18 +19,30 @@ class MarsRoverTest {
 
         @ParameterizedTest(name = "when initial orientation is {0}")
         @MethodSource("dbus.MarsRoverTest#turnLeftArgs")
-        void test(Orientation initialOrientation, Orientation expectedOrientation) {
-            MarsRover marsRover = marsRover(initialOrientation);
+        void turn_left(Orientation initialOrientation, Orientation expectedOrientation) {
+            MarsRover marsRover = new MarsRover(initialOrientation);
 
             marsRover.turnLeft();
 
-            assertThat(marsRover).isEqualTo(marsRover(expectedOrientation));
+            assertThat(marsRover).isEqualTo(new MarsRover(expectedOrientation));
         }
 
     }
 
-    private static MarsRover marsRover(Orientation orientation) {
-        return new MarsRover(orientation);
+    @Nested
+    @DisplayName("turn right")
+    class TurnRight {
+
+        @ParameterizedTest(name = "when initial orientation is {0}")
+        @MethodSource("dbus.MarsRoverTest#turnRightArgs")
+        void turn_right(Orientation initialOrientation, Orientation expectedOrientation) {
+            MarsRover marsRover = new MarsRover(initialOrientation);
+
+            marsRover.turnRight();
+
+            assertThat(marsRover).isEqualTo(new MarsRover(expectedOrientation));
+        }
+
     }
 
     private static Stream<Arguments> turnLeftArgs() {
@@ -39,6 +51,15 @@ class MarsRoverTest {
                 Arguments.of(Orientation.WEST, Orientation.SOUTH),
                 Arguments.of(Orientation.SOUTH, Orientation.EAST),
                 Arguments.of(Orientation.EAST, Orientation.NORTH)
+        );
+    }
+
+    private static Stream<Arguments> turnRightArgs() {
+        return Stream.of(
+                Arguments.of(Orientation.NORTH, Orientation.EAST),
+                Arguments.of(Orientation.EAST, Orientation.SOUTH),
+                Arguments.of(Orientation.SOUTH, Orientation.WEST),
+                Arguments.of(Orientation.WEST, Orientation.NORTH)
         );
     }
 

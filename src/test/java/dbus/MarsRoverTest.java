@@ -82,13 +82,17 @@ class MarsRoverTest {
 
     private static Stream<Arguments> forwardArgs() {
         return Stream.of(
-                Arguments.of(Orientation.NORTH, Coordinates.of(3, 4),
+                Arguments.of(
+                        Orientation.NORTH, Coordinates.of(3, 4),
                         Orientation.NORTH, Coordinates.of(3, 5)),
-                Arguments.of(Orientation.EAST, Coordinates.of(23, 24),
+                Arguments.of(
+                        Orientation.EAST, Coordinates.of(23, 24),
                         Orientation.EAST, Coordinates.of(24, 24)),
-                Arguments.of(Orientation.SOUTH, Coordinates.of(7, 8),
+                Arguments.of(
+                        Orientation.SOUTH, Coordinates.of(7, 8),
                         Orientation.SOUTH, Coordinates.of(7, 7)),
-                Arguments.of(Orientation.WEST, Coordinates.of(67, 9),
+                Arguments.of(
+                        Orientation.WEST, Coordinates.of(67, 9),
                         Orientation.WEST, Coordinates.of(66, 9))
         );
     }

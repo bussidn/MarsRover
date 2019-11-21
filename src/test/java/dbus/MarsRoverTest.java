@@ -20,11 +20,11 @@ class MarsRoverTest {
         @ParameterizedTest(name = "when initial orientation is {0}")
         @MethodSource("dbus.MarsRoverTest#turnLeftArgs")
         void turn_left(Orientation initialOrientation, Orientation expectedOrientation) {
-            MarsRover marsRover = new MarsRover(initialOrientation);
+            MarsRover marsRover = new MarsRover(initialOrientation, Coordinates.of(0, 0));
 
             marsRover.turnLeft();
 
-            assertThat(marsRover).isEqualTo(new MarsRover(expectedOrientation));
+            assertThat(marsRover).isEqualTo(new MarsRover(expectedOrientation, Coordinates.of(0, 0)));
         }
 
     }
@@ -36,11 +36,28 @@ class MarsRoverTest {
         @ParameterizedTest(name = "when initial orientation is {0}")
         @MethodSource("dbus.MarsRoverTest#turnRightArgs")
         void turn_right(Orientation initialOrientation, Orientation expectedOrientation) {
-            MarsRover marsRover = new MarsRover(initialOrientation);
+            MarsRover marsRover = new MarsRover(initialOrientation, Coordinates.of(0, 0));
 
             marsRover.turnRight();
 
-            assertThat(marsRover).isEqualTo(new MarsRover(expectedOrientation));
+            assertThat(marsRover).isEqualTo(new MarsRover(expectedOrientation, Coordinates.of(0, 0)));
+        }
+
+    }
+
+    @Nested
+    @DisplayName("forward")
+    class Forward {
+
+        @ParameterizedTest(name = "when initial orientation is {0} and coordinates are {1}")
+        @MethodSource("dbus.MarsRoverTest#forwardArgs")
+        void forward(Orientation initialOrientation, Coordinates initialCoordinates,
+                     Orientation expectedOrientation, Coordinates expectedCoordinates) {
+            MarsRover marsRover = new MarsRover(initialOrientation, initialCoordinates);
+
+            marsRover.forward();
+
+            assertThat(marsRover).isEqualTo(new MarsRover(expectedOrientation, expectedCoordinates));
         }
 
     }
@@ -60,6 +77,19 @@ class MarsRoverTest {
                 Arguments.of(Orientation.EAST, Orientation.SOUTH),
                 Arguments.of(Orientation.SOUTH, Orientation.WEST),
                 Arguments.of(Orientation.WEST, Orientation.NORTH)
+        );
+    }
+
+    private static Stream<Arguments> forwardArgs() {
+        return Stream.of(
+                Arguments.of(Orientation.NORTH, Coordinates.of(3, 4),
+                        Orientation.NORTH, Coordinates.of(3, 5)),
+                Arguments.of(Orientation.EAST, Coordinates.of(23, 24),
+                        Orientation.EAST, Coordinates.of(24, 24)),
+                Arguments.of(Orientation.SOUTH, Coordinates.of(7, 8),
+                        Orientation.SOUTH, Coordinates.of(7, 7)),
+                Arguments.of(Orientation.WEST, Coordinates.of(67, 9),
+                        Orientation.WEST, Coordinates.of(66, 9))
         );
     }
 

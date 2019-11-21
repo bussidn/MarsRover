@@ -8,9 +8,11 @@ import lombok.ToString;
 class MarsRover {
 
     private Orientation orientation;
+    private Coordinates coordinates;
 
-    MarsRover(Orientation orientation) {
+    MarsRover(Orientation orientation, Coordinates coordinates) {
         this.orientation = orientation;
+        this.coordinates = coordinates;
     }
 
     void turnLeft() {
@@ -19,5 +21,9 @@ class MarsRover {
 
     void turnRight() {
         orientation = orientation.right();
+    }
+
+    void forward() {
+        coordinates = orientation.move(coordinates);
     }
 }

@@ -14,7 +14,7 @@ class MarsRover {
     }
 
     void turnLeft() {
-        orientation = Orientation.WEST;
+        orientation = orientation.left();
     }
 
 }

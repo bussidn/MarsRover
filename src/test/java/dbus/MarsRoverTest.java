@@ -36,7 +36,8 @@ class MarsRoverTest {
 
     private static Stream<Arguments> turnLeftArgs() {
         return Stream.of(
-                Arguments.of(Orientation.NORTH, Orientation.WEST)
+                Arguments.of(Orientation.NORTH, Orientation.WEST),
+                Arguments.of(Orientation.WEST, Orientation.SOUTH)
         );
     }
 

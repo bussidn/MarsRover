@@ -29,6 +29,15 @@ class MarsRoverTest {
 
     }
 
+    private static Stream<Arguments> turnRightArgs() {
+        return Stream.of(
+                Arguments.of(Orientation.NORTH, Orientation.EAST),
+                Arguments.of(Orientation.EAST, Orientation.SOUTH),
+                Arguments.of(Orientation.SOUTH, Orientation.WEST),
+                Arguments.of(Orientation.WEST, Orientation.NORTH)
+        );
+    }
+
     @Nested
     @DisplayName("turn right")
     class TurnRight {
@@ -43,6 +52,15 @@ class MarsRoverTest {
             assertThat(marsRover).isEqualTo(new MarsRover(expectedOrientation, Coordinates.of(0, 0)));
         }
 
+    }
+
+    private static Stream<Arguments> turnLeftArgs() {
+        return Stream.of(
+                Arguments.of(Orientation.NORTH, Orientation.WEST),
+                Arguments.of(Orientation.WEST, Orientation.SOUTH),
+                Arguments.of(Orientation.SOUTH, Orientation.EAST),
+                Arguments.of(Orientation.EAST, Orientation.NORTH)
+        );
     }
 
     @Nested
@@ -60,24 +78,6 @@ class MarsRoverTest {
             assertThat(marsRover).isEqualTo(new MarsRover(expectedOrientation, expectedCoordinates));
         }
 
-    }
-
-    private static Stream<Arguments> turnLeftArgs() {
-        return Stream.of(
-                Arguments.of(Orientation.NORTH, Orientation.WEST),
-                Arguments.of(Orientation.WEST, Orientation.SOUTH),
-                Arguments.of(Orientation.SOUTH, Orientation.EAST),
-                Arguments.of(Orientation.EAST, Orientation.NORTH)
-        );
-    }
-
-    private static Stream<Arguments> turnRightArgs() {
-        return Stream.of(
-                Arguments.of(Orientation.NORTH, Orientation.EAST),
-                Arguments.of(Orientation.EAST, Orientation.SOUTH),
-                Arguments.of(Orientation.SOUTH, Orientation.WEST),
-                Arguments.of(Orientation.WEST, Orientation.NORTH)
-        );
     }
 
     private static Stream<Arguments> forwardArgs() {
